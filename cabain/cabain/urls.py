@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from projects.views import login
+from cabin_APP import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', login),
+    path('listado_regiones/', views.listado_regiones, name='listado_regiones'),
+    path('ingresar_region/', views.ingresar_region, name='ingresar_region'),
+    path('listado_ciudades/', views.listado_ciudades, name='listado_ciudades'),
+    path('ingresar_ciudades/', views.ingresar_ciudades, name='ingresar_ciudad')
 ]
