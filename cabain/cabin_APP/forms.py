@@ -1,5 +1,5 @@
 from django import forms
-from cabin_APP.models import Region, City
+from cabin_APP.models import Region, City, User, Project
 
 class FormRegion(forms.ModelForm):
     class Meta:
@@ -11,3 +11,24 @@ class FormCity(forms.ModelForm):
         model = City
         fields = '__all__'
 
+class FormUserLogin(forms.ModelForm):
+    class Meta:
+        model = User
+        widgets ={
+            'password': forms.PasswordInput()
+        }
+        fields = ['username', 'password']
+
+
+class FormUserRegistration(forms.ModelForm):
+    class Meta:
+        model = User
+        widgets = {
+            'password': forms.PasswordInput()
+        }
+        fields = '__all__'
+
+class FormCreateProject(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['project_name', 'surface', 'total_price']

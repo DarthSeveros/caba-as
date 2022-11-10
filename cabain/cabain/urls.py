@@ -22,5 +22,9 @@ urlpatterns = [
     path('listado_regiones/', views.listado_regiones, name='listado_regiones'),
     path('ingresar_region/', views.ingresar_region, name='ingresar_region'),
     path('listado_ciudades/', views.listado_ciudades, name='listado_ciudades'),
-    path('ingresar_ciudades/', views.ingresar_ciudades, name='ingresar_ciudad')
+    path('ingresar_ciudades/', views.ingresar_ciudades, name='ingresar_ciudad'),
+    path('iniciar_sesion/',views.iniciar_sesion, name='iniciar_sesion'),
+    path('registrarse/', views.resgistrar_usuario, name='registro'),
+    path('proyecto_nuevo/', views.crear_proyecto, name='crear_proyecto'),
+    path('main_menu/', views.main_menu, name='menu_principal'),
 ]

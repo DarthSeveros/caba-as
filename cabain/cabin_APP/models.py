@@ -33,6 +33,9 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+    def getToLogin(self):
+        return (self.username, self.password)
+
 class PaymentMethod(models.Model):
     payment_name = models.CharField(max_length=30, verbose_name='Método de pago')
 
@@ -112,7 +115,7 @@ class BillDetail(models.Model):
 class Project(models.Model):
     project_name = models.CharField(max_length=60, verbose_name='Nombre Proyecto')
     surface = models.IntegerField(verbose_name='Superficie(m2)')
-    total_price = models.IntegerField(verbose_name='Costo total')
+    total_price = models.IntegerField(verbose_name='Costo total', blank=True, null=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuario')
 
     def __str__(self):
