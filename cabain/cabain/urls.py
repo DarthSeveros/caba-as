@@ -27,4 +27,5 @@ urlpatterns = [
     path('registrarse/', views.resgistrar_usuario, name='registro'),
     path('proyecto_nuevo/', views.crear_proyecto, name='crear_proyecto'),
     path('main_menu/', views.main_menu, name='menu_principal'),
+    path('payment_method/', views.payment_method , name='payment_method'),
 ]

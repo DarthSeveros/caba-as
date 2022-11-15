@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormRegion, FormCity, FormUserLogin, FormUserRegistration, FormCreateProject
-from cabin_APP.models import Region, City, User, Project
+from cabin_APP.forms import FormRegion, FormCity, FormUserLogin, FormUserRegistration, FormCreateProject, FormPaymenMethod
+from cabin_APP.models import Region, City, User, Project, PaymentMethod
 
 # Create your views here.
 
@@ -70,3 +70,14 @@ def crear_proyecto(request):
 
 def main_menu(request):
     return render(request, 'menu_principal.html')
+
+def payment_method(request):
+    form = FormPaymenMethod()
+    if request.method == 'POST':
+        form = FormPaymenMethod(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(main_menu)
+    context = {'form': form}
+    return render(request, 'metodo_pago.html', context)
+    

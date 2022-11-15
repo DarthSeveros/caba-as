@@ -1,5 +1,5 @@
 from django import forms
-from cabin_APP.models import Region, City, User, Project
+from cabin_APP.models import Region, City, User, Project, PaymentMethod
 
 class FormRegion(forms.ModelForm):
     class Meta:
@@ -32,3 +32,9 @@ class FormCreateProject(forms.ModelForm):
     class Meta:
         model = Project
         fields = ['project_name', 'surface', 'total_price']
+
+    
+class FormPaymenMethod(forms.ModelForm):
+    class Meta:
+        model = PaymentMethod
+        fields = '__all__'
