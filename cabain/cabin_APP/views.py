@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormRegion, FormCity, FormUserLogin, FormUserRegistration, FormCreateProject, FormPaymenMethod
-from cabin_APP.models import Region, City, User, Project, PaymentMethod
+from cabin_APP.forms import FormRegion, FormCity, FormUserLogin, FormUserRegistration, FormCreateProject, FormPaymenMethod, FormUnidadMedida
+from cabin_APP.models import Region, City, User, Project, PaymentMethod, MeasureUnit
 
 # Create your views here.
 
@@ -80,4 +80,15 @@ def payment_method(request):
             return redirect(main_menu)
     context = {'form': form}
     return render(request, 'metodo_pago.html', context)
+
+def unidad_medida(request):
+    form = FormUnidadMedida()
+    if request.method == 'POST':
+        form = FormUnidadMedida(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(main_menu)
+    context = {'form': form}
+    return render(request, 'unidadMedida.html', context)
+
     

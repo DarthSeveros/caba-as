@@ -1,5 +1,5 @@
 from django import forms
-from cabin_APP.models import Region, City, User, Project, PaymentMethod
+from cabin_APP.models import Region, City, User, Project, PaymentMethod, MeasureUnit
 
 class FormRegion(forms.ModelForm):
     class Meta:
@@ -37,4 +37,9 @@ class FormCreateProject(forms.ModelForm):
 class FormPaymenMethod(forms.ModelForm):
     class Meta:
         model = PaymentMethod
+        fields = '__all__'
+
+class FormUnidadMedida(forms.ModelForm):
+    class Meta:
+        model = MeasureUnit
         fields = '__all__'
