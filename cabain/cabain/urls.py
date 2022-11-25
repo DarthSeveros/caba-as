@@ -29,4 +29,6 @@ urlpatterns = [
     path('main_menu/', views.main_menu, name='menu_principal'),
     path('payment_method/', views.payment_method , name='payment_method'),
     path('unidad_medida/', views.unidad_medida, name='unidad_medida'),
+    path('unidad_medida/<int:id>', views.actualizar_unidad_medida, name='actualizar_unidad_medida'),
+    path('unidad_medida_delete/<int:id>', views.eliminar_unidad_medida, name='eliminar_unidad_medida'),
 ]

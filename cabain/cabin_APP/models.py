@@ -54,9 +54,10 @@ class Bank(models.Model):
 
 class MeasureUnit(models.Model):
     unit_name = models.CharField(max_length=20, verbose_name='Unidad de medida')
+    symbol = models.CharField(max_length=20, verbose_name='Símbolo')
 
     def __str__(self):
-        return self.unit_name
+        return self.symbol
 
 class Product(models.Model):
     product_name = models.CharField(max_length=30, verbose_name='Nombre del producto')

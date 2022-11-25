@@ -87,8 +87,30 @@ def unidad_medida(request):
         form = FormUnidadMedida(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(main_menu)
-    context = {'form': form}
+            return redirect(unidad_medida)
+    unidades = MeasureUnit.objects.all()
+    context = {
+        'form': form,
+        'unidades': unidades
+    }
     return render(request, 'unidadMedida.html', context)
 
+def actualizar_unidad_medida(request, id):
+    unidad = MeasureUnit.objects.get(id = id)
+    form = FormUnidadMedida(instance=unidad)
+    if request.method == 'POST':
+        form = FormUnidadMedida(request.POST, instance=unidad)
+        if form.is_valid():
+            form.save()
+            return redirect(unidad_medida)
+    unidades = MeasureUnit.objects.all()
+    context = {
+        'form': form,
+        'unidades': unidades
+    }
+    return render(request, 'editar_unidadMedida.html', context)
     
+def eliminar_unidad_medida(request, id):
+    unidad = MeasureUnit.objects.get(id=id)
+    unidad.delete()
+    return redirect(unidad_medida)
