@@ -11,7 +11,7 @@
     {% block head %}
     {% endblock %}
 </head>
-<body class="container mt-5">
+<body class="container mt-5" {% block onload %}{% endblock onload %}>
     {% block body %}
     {% endblock %}
 </body>

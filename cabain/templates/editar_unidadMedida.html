@@ -27,7 +27,7 @@
                 <td>{{ unidad.id }}</td>
                 <td>{{ unidad.unit_name}}</td>
                 <td>{{ unidad.symbol }}</td>
-                <td><a href="{% url 'actualizar_unidad_medida' id=unidad.id %}" class="btn btn-success btn-smf float-end"><i class="bi bi-pencil"></i></td>
+                <td><a href="{% url 'actualizar_unidad_medida' id=unidad.id %}" class="btn btn-success btn-sm float-end"><i class="bi bi-pencil"></a></i></td>
                 <td><a href="{% url 'eliminar_unidad_medida' id=unidad.id %}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></td>
             </tr>
             {% endfor %}

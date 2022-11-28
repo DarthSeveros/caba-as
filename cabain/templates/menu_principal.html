@@ -24,11 +24,11 @@
     </div>
     <div class="col">
         <button class="btn p-3 w-100 btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Materiales(no funciona) 
+            Extras 
         </button>      
         <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Ver Materiales</button></li>
-            <li><button href="" class="dropdown-item" type="button">Nuevo Proyecto</button></li>
+            <li><a href="{% url 'payment_method' %}" class="dropdown-item" type="button">Métodos de pago</a></li>
+            <li><a href="{% url 'unidad_medida' %}" class="dropdown-item" type="button">Unidades de medida</a></li>
         </ul>
     </div>
 </div>

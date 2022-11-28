@@ -50,8 +50,6 @@ class Bank(models.Model):
     def __str__(self):
         return self.bank_name
 
-#Parra measure unit y product
-
 class MeasureUnit(models.Model):
     unit_name = models.CharField(max_length=20, verbose_name='Unidad de medida')
     symbol = models.CharField(max_length=20, verbose_name='Símbolo')
@@ -66,8 +64,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
-
-#hasta aqui
 
 class Client(models.Model):
     client_rut = models.CharField(max_length=12, verbose_name='Rut Cliente')

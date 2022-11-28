@@ -1,13 +1,9 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block title %}Ingresar{% endblock %}
 
 {% block head %}
-<script>
-    function setIdDelete(id, nombre){
-        document.getElementById('deleteConfirm').href = "/unidad_medida_delete/" + id;
-        document.getElementById('datoEliminado').textContent = nombre;
-    }
-</script>
+<script src="{% static 'js/functions.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -28,9 +24,9 @@
                 <td>{{ unidad.id }}</td>
                 <td>{{ unidad.unit_name}}</td>
                 <td>{{ unidad.symbol }}</td>
-                <td><a href="{% url 'actualizar_unidad_medida' id=unidad.id %}" class="btn btn-success btn-sm float-end"><i class="bi bi-pencil"></i></td>
+                <td><a href="{% url 'actualizar_unidad_medida' id=unidad.id %}" class="btn btn-success btn-sm float-end"><i class="bi bi-pencil"></i></a></td>
                 <td>
-                    <button type="button" onclick="setIdDelete('{{ unidad.id }}', '{{ unidad.unit_name }}');" class="btn btn-danger btn-sm float-start" data-bs-toggle="modal" data-bs-target="#deleteUnitModal">
+                    <button type="button" onclick="url='{% url "eliminar_unidad_medida" id=unidad.id %}';setIdDelete('{{ unidad.id }}', '{{ unidad.unit_name }}', url);" class="btn btn-danger btn-sm float-start" data-bs-toggle="modal" data-bs-target="#deleteUnitModal">
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>
@@ -44,11 +40,19 @@
     </div>
     {% endif %}
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUnitModal">
-    Agregar unidad
-  </button>
-  
+    <table class="table">
+      <tr>
+          <td>
+              <a href="{% url 'menu_principal' %}" class="btn btn-outline-secondary">Volver</a>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addUnitModal">
+              Agregar unidad
+          </button>
+          </td>    
+      </tr>
+  </table>
+
 <!-- Modal Ingresar unidad -->
 <div class="modal fade" id="addUnitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -79,7 +83,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar unidad</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar unidad</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -87,7 +91,7 @@
             <p id="datoEliminado"></p>
         </div>
         <div class="modal-footer">
-          <a href="{% url 'unidad_medida' %}" class="btn btn-secondary">Cerrar</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           <a id="deleteConfirm" href="" class="btn btn-danger btn-sm">Eliminar</a>
         </div>
       </div>

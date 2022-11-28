@@ -77,9 +77,33 @@ def payment_method(request):
         form = FormPaymenMethod(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(main_menu)
-    context = {'form': form}
+            return redirect(payment_method)
+    metodos = PaymentMethod.objects.all()
+    context = {
+        'form': form,
+        'metodos': metodos
+        }
     return render(request, 'metodo_pago.html', context)
+
+def eliminar_metodo_pago(request, id):
+    metodo = PaymentMethod.objects.get(id=id)
+    metodo.delete()
+    return redirect(payment_method)
+
+def actualizar_metodo_pago(request, id):
+    form = PaymentMethod()
+    metodo = PaymentMethod.objects.get(id=id)
+    if request.method == 'POST':
+        form = PaymentMethod(instance=metodo)
+        if form.is_valid():
+            form.save()
+            return redirect(payment_method)
+    metodos = PaymentMethod.objects.all()
+    context = {
+        'form': form,
+        'metodos': metodos
+    }
+    return render(request, 'actualizar_metodo_pago.html', context)
 
 def unidad_medida(request):
     form = FormUnidadMedida()
