@@ -9,8 +9,8 @@
             Proyectos
         </button>      
         <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Ver Proyectos(no funciona)</button></li>
-            <li><button href="{% url 'crear_proyecto' %}" class="dropdown-item" type="button">Nuevo Proyecto</button></li>
+            <li><a href="{% url 'listado_proyectos' %}" class="dropdown-item" type="button">Ver Proyectos</a></li>
+            <li><a href="{% url 'crear_proyecto' userId=usuario %}" class="dropdown-item" type="button">Nuevo Proyecto</a></li>
         </ul>
     </div>
     <div class="col">
@@ -29,6 +29,7 @@
         <ul class="dropdown-menu">
             <li><a href="{% url 'payment_method' %}" class="dropdown-item" type="button">Métodos de pago</a></li>
             <li><a href="{% url 'unidad_medida' %}" class="dropdown-item" type="button">Unidades de medida</a></li>
+            <li><a href="{% url 'listado_maestro' %}" class="dropdown-item" type="button">Maestros</a></li>
         </ul>
     </div>
 </div>

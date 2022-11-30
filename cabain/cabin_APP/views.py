@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormRegion, FormCity, FormUserLogin, FormUserRegistration, FormCreateProject, FormPaymenMethod, FormUnidadMedida
-from cabin_APP.models import Region, City, User, Project, PaymentMethod, MeasureUnit
+from cabin_APP.forms import FormRegion, FormCity, FormUserLogin, FormUserRegistration, FormCreateProject, FormPaymenMethod, FormUnidadMedida, FormWorker
+from cabin_APP.models import Region, City, User, Project, PaymentMethod, MeasureUnit, Worker
 
 # Create your views here.
 
@@ -44,7 +44,7 @@ def iniciar_sesion(request):
             if User.objects.filter(username=user).exists():
                 user_consult = User.objects.get(username=user)
                 if (user, password) == user_consult.getToLogin():
-                    return redirect(main_menu)  
+                    return main_menu(request, user_consult.getId())  
     context = {'form' : form}
     return render(request, 'login.html', context)
 
@@ -54,22 +54,29 @@ def resgistrar_usuario(request):
         form = FormUserRegistration(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(main_menu)
+            return redirect(iniciar_sesion)
     context = {'form': form}
     return render(request, 'registro.html', context)
 
-def crear_proyecto(request):
+def crear_proyecto(request, userId):
     form = FormCreateProject()
+    form.fields['username'].initial = userId
     if request.method == 'POST':
         form = FormCreateProject(request.POST)
         if form.is_valid():
             form.save()
-            return redirect()
+            return redirect(listado_proyectos)
     context = {'form': form}
     return render(request, 'proyecto_nuevo.html', context)
 
-def main_menu(request):
-    return render(request, 'menu_principal.html')
+def listado_proyectos(request):
+    proyectos = Project.objects.all()
+    context = {'proyectos': proyectos}
+    return render(request, 'listado_proyectos.html', context)
+
+def main_menu(request, userId):
+    context = {'usuario': userId}
+    return render(request, 'menu_principal.html', context)
 
 def payment_method(request):
     form = FormPaymenMethod()
@@ -138,3 +145,29 @@ def eliminar_unidad_medida(request, id):
     unidad = MeasureUnit.objects.get(id=id)
     unidad.delete()
     return redirect(unidad_medida)
+
+def ingresar_maestro(request):
+    form = FormWorker()
+    if request.method == 'POST':
+        form = FormWorker(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(listado_maestro)
+    context = {'form': form}
+    return render(request, 'ingresar_maestro.html', context)
+
+def listado_maestro(request):
+    maestros = Worker.objects.all()
+    context = {'maestros': maestros}
+    return render(request, 'listar_maestro.html', context)
+
+def actualizar_maestro(request, id):
+    worker = Worker.objects.get(id=id)
+    form = FormWorker(instance=worker)
+    if request.method == 'POST':
+        form = FormWorker(request.POST, instance=worker)
+        if form.is_valid():
+            form.save()
+            return redirect(listado_maestro)
+    context = {'form': form}
+    return render(request, 'actualizar_maestro.html', context)

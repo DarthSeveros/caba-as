@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Proyectos{% endblock title %}
+
+{% block body %}
+  <div class="alert alert-info display-1 text-center">Proyectos</div>
+
+{% if proyectos %}
+    {% for proyecto in proyectos %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ proyecto.project_name}}</h5>
+                <p class="card-text">Superficie: {{proyecto.surface}}</p>
+                <p class="car-text">Costo total: {{proyecto.total_price}}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    {% endfor %}
+          </tbody>
+      </table>
+{% else %}
+      <div class="alert alert-primary" role="alert">
+          <strong>No se encuentran proyecto en el sistema</strong>
+      </div>
+{% endif %}
+
+{% endblock body %}

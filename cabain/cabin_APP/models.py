@@ -23,6 +23,7 @@ class Commune(models.Model):
         return self.commune_name
 
 class User(models.Model):
+    id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=30, verbose_name='Usuario')
     password = models.CharField(max_length=30, verbose_name='Contraseña')
     names = models.CharField(max_length=60, verbose_name='Nombre')
@@ -33,10 +34,11 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+    def getId(self):
+        return self.id
+
     def getToLogin(self):
         return (self.username, self.password)
-
-#Falta por crear form y html
 
 class PaymentMethod(models.Model):
     payment_name = models.CharField(max_length=30, verbose_name='Método de pago')
@@ -141,7 +143,7 @@ class Worker(models.Model):
     def __str__(self):
         return f'{self.names} {self.last_names}'
     
-class ProjectWorker():
+class ProjectWorker(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Proyecto')
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE, verbose_name='Trabajador')
     work = models.CharField(max_length=60, verbose_name='Trabajo')
