@@ -34,7 +34,7 @@ urlpatterns = [
     path('unidad_medida/', views.unidad_medida, name='unidad_medida'),
     path('unidad_medida/<int:id>', views.actualizar_unidad_medida, name='actualizar_unidad_medida'),
     path('unidad_medida_delete/<int:id>', views.eliminar_unidad_medida, name='eliminar_unidad_medida'),
-    path('maestro/', views.ingresar_maestro, name='ingresar_maestro'),
-    path('listado_maestro/', views.listado_maestro, name='listado_maestro'),
-    path('actualizar_maestro/<int:id>', views.actualizar_maestro, name='actualizar_maestro')
+    path('maestro/', views.maestro, name='maestro'),
+    path('actualizar_maestro/<int:id>', views.actualizar_maestro, name='actualizar_maestro'),
+    path('aliminar_maestro/<int:id>', views.eliminar_maestro, name='eliminar_maestro')
 ]

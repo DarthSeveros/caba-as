@@ -38,7 +38,7 @@ class FormCreateProject(forms.ModelForm):
         fields = '__all__'
 
     
-class FormPaymenMethod(forms.ModelForm):
+class FormPaymentMethod(forms.ModelForm):
     class Meta:
         model = PaymentMethod
         fields = '__all__'

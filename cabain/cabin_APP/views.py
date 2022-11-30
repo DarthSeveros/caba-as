@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormRegion, FormCity, FormUserLogin, FormUserRegistration, FormCreateProject, FormPaymenMethod, FormUnidadMedida, FormWorker
+from cabin_APP.forms import FormRegion, FormCity, FormUserLogin, FormUserRegistration, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
 from cabin_APP.models import Region, City, User, Project, PaymentMethod, MeasureUnit, Worker
 
 # Create your views here.
@@ -79,9 +79,9 @@ def main_menu(request, userId):
     return render(request, 'menu_principal.html', context)
 
 def payment_method(request):
-    form = FormPaymenMethod()
+    form = FormPaymentMethod()
     if request.method == 'POST':
-        form = FormPaymenMethod(request.POST)
+        form = FormPaymentMethod(request.POST)
         if form.is_valid():
             form.save()
             return redirect(payment_method)
@@ -98,10 +98,10 @@ def eliminar_metodo_pago(request, id):
     return redirect(payment_method)
 
 def actualizar_metodo_pago(request, id):
-    form = PaymentMethod()
     metodo = PaymentMethod.objects.get(id=id)
+    form = FormPaymentMethod(instance=metodo)
     if request.method == 'POST':
-        form = PaymentMethod(instance=metodo)
+        form = FormPaymentMethod(request.POST, instance=metodo)
         if form.is_valid():
             form.save()
             return redirect(payment_method)
@@ -146,20 +146,19 @@ def eliminar_unidad_medida(request, id):
     unidad.delete()
     return redirect(unidad_medida)
 
-def ingresar_maestro(request):
+def maestro(request):
     form = FormWorker()
+    maestros = Worker.objects.all()
     if request.method == 'POST':
         form = FormWorker(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(listado_maestro)
-    context = {'form': form}
-    return render(request, 'ingresar_maestro.html', context)
-
-def listado_maestro(request):
-    maestros = Worker.objects.all()
-    context = {'maestros': maestros}
-    return render(request, 'listar_maestro.html', context)
+            return redirect(maestro)
+    context = {
+        'form': form,
+        'maestros': maestros
+        }
+    return render(request, 'maestro.html', context)
 
 def actualizar_maestro(request, id):
     worker = Worker.objects.get(id=id)
@@ -168,6 +167,11 @@ def actualizar_maestro(request, id):
         form = FormWorker(request.POST, instance=worker)
         if form.is_valid():
             form.save()
-            return redirect(listado_maestro)
+            return redirect(maestro)
     context = {'form': form}
     return render(request, 'actualizar_maestro.html', context)
+
+def eliminar_maestro(request, id):
+    worker = Worker.objects.get(id=id)
+    worker.delete()
+    return redirect(maestro)
