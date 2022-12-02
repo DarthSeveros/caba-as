@@ -14,19 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from cabin_APP import views
 
 urlpatterns = [
+    path('cuenta/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('listado_regiones/', views.listado_regiones, name='listado_regiones'),
-    path('ingresar_region/', views.ingresar_region, name='ingresar_region'),
-    path('listado_ciudades/', views.listado_ciudades, name='listado_ciudades'),
-    path('ingresar_ciudades/', views.ingresar_ciudades, name='ingresar_ciudad'),
-    path('',views.iniciar_sesion, name='iniciar_sesion'),
-    path('registrarse/', views.resgistrar_usuario, name='registro'),
-    path('proyecto_nuevo/<int:userId>', views.crear_proyecto, name='crear_proyecto'),
-    path('proyectos/', views.listado_proyectos, name='listado_proyectos'),
+    path('proyecto_nuevo/', views.crear_proyecto, name='crear_proyecto'),
+    path('proyecto/', views.listado_proyectos, name='listado_proyectos'),
     path('menu/', views.main_menu, name='menu_principal'),
     path('payment_method/', views.payment_method , name='payment_method'),
     path('eliminar_metodo_pago/<int:id>', views.eliminar_metodo_pago, name='eliminar_metodo_pago'),
@@ -36,5 +31,6 @@ urlpatterns = [
     path('unidad_medida_delete/<int:id>', views.eliminar_unidad_medida, name='eliminar_unidad_medida'),
     path('maestro/', views.maestro, name='maestro'),
     path('actualizar_maestro/<int:id>', views.actualizar_maestro, name='actualizar_maestro'),
-    path('aliminar_maestro/<int:id>', views.eliminar_maestro, name='eliminar_maestro')
+    path('eliminar_maestro/<int:id>', views.eliminar_maestro, name='eliminar_maestro'),
+    path('sessions/', views.sessions, name='sessions'),
 ]

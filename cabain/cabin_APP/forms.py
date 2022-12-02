@@ -1,5 +1,5 @@
 from django import forms
-from cabin_APP.models import Region, City, User, Project, PaymentMethod, MeasureUnit, Worker
+from cabin_APP.models import Region, City, Project, PaymentMethod, MeasureUnit, Worker
 
 class FormRegion(forms.ModelForm):
     class Meta:
@@ -11,24 +11,6 @@ class FormCity(forms.ModelForm):
         model = City
         fields = '__all__'
 
-class FormUserLogin(forms.ModelForm):
-    class Meta:
-        model = User
-        widgets ={
-            'password': forms.PasswordInput(),
-            'id': forms.HiddenInput()
-        }
-        fields = ['id' ,'username', 'password']
-
-
-class FormUserRegistration(forms.ModelForm):
-    class Meta:
-        model = User
-        widgets = {
-            'password': forms.PasswordInput()
-        }
-        fields = '__all__'
-
 class FormCreateProject(forms.ModelForm):
     class Meta:
         model = Project
@@ -36,7 +18,6 @@ class FormCreateProject(forms.ModelForm):
             'username': forms.HiddenInput
         }
         fields = '__all__'
-
     
 class FormPaymentMethod(forms.ModelForm):
     class Meta:

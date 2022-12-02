@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -21,24 +22,6 @@ class Commune(models.Model):
 
     def __str__(self):
         return self.commune_name
-
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=30, verbose_name='Usuario')
-    password = models.CharField(max_length=30, verbose_name='Contraseña')
-    names = models.CharField(max_length=60, verbose_name='Nombre')
-    last_names = models.CharField(max_length=60, verbose_name='Apellido')
-    email = models.EmailField(verbose_name='Correo electrónico')
-    phone = models.CharField(max_length=20, verbose_name='Celular')
-
-    def __str__(self):
-        return self.username
-
-    def getId(self):
-        return self.id
-
-    def getToLogin(self):
-        return (self.username, self.password)
 
 class PaymentMethod(models.Model):
     payment_name = models.CharField(max_length=30, verbose_name='Método de pago')

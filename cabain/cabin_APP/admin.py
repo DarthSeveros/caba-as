@@ -5,7 +5,6 @@ from . import models as m
 admin.site.register(m.Commune)
 admin.site.register(m.Region)
 admin.site.register(m.City)
-admin.site.register(m.User)
 admin.site.register(m.PaymentMethod)
 admin.site.register(m.Bank)
 admin.site.register(m.MeasureUnit)
