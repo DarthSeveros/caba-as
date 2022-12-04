@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
-from cabin_APP.models import Region, City, Project, PaymentMethod, MeasureUnit, Worker
+from cabin_APP.forms import FormProduct, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
+from cabin_APP.models import Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -140,3 +140,49 @@ def sessions(request):
     auto = request.session['auto']
     print(auto)
     return redirect(maestro)
+
+@login_required
+def proyecto(request, id):
+    proyecto = Project.objects.get(id=id)
+    nombre_proyecto = proyecto.project_name
+    context = {
+        'nombre_proyecto': nombre_proyecto
+    }
+    return render(request, 'proyecto.html', context)
+
+@login_required
+def producto(request):
+    productos = Product.objects.all()
+    form = FormProduct()
+    if request.method == 'POST':
+        form = FormProduct(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect(producto)
+    context = {
+        'items': productos,
+        'form': form
+    }
+    return render(request, 'producto.html', context)
+
+@login_required
+def eliminar_producto(request, id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    return redirect(producto)
+
+####falta funcion actulizar producto####
+@login_required
+def actualizar_producto(request, id):
+    product = Product.objects.get(id=id)
+    form = FormProduct(instance=product)
+    if request.method=='POST':
+        form = FormProduct(request.POST, instance=product)
+        if form.is_valid:
+            form.save()
+            return redirect(producto)
+    context = {
+        'form': form
+    }
+    return
+

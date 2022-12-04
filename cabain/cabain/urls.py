@@ -18,10 +18,13 @@ from django.urls import include, path
 from cabin_APP import views
 
 urlpatterns = [
+    path('producto/', views.producto, name='producto'),
+    path('eliminar_producto/<int:id>', views.eliminar_producto, name='eliminar_producto'),
+    path('proyecto/<int:id>', views.proyecto, name='proyecto'),
     path('cuenta/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('proyecto_nuevo/', views.crear_proyecto, name='crear_proyecto'),
-    path('proyecto/', views.listado_proyectos, name='listado_proyectos'),
+    path('listado_proyecto/', views.listado_proyectos, name='listado_proyectos'),
     path('menu/', views.main_menu, name='menu_principal'),
     path('payment_method/', views.payment_method , name='payment_method'),
     path('eliminar_metodo_pago/<int:id>', views.eliminar_metodo_pago, name='eliminar_metodo_pago'),

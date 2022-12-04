@@ -11,7 +11,7 @@
                 <h5 class="card-title">{{ proyecto.project_name}}</h5>
                 <p class="card-text">Superficie: {{proyecto.surface}}</p>
                 <p class="car-text">Costo total: {{proyecto.total_price}}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="{% url 'proyecto' id=proyecto.id %}" class="btn btn-primary">Detalles</a>
             </div>
         </div>
     {% endfor %}
@@ -22,5 +22,5 @@
           <strong>No se encuentran proyecto en el sistema</strong>
       </div>
 {% endif %}
-
+<a href="{% url 'menu_principal' %}" class="btn btn-outline-secondary">Volver</a>
 {% endblock body %}

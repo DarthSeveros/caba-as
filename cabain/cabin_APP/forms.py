@@ -1,5 +1,5 @@
 from django import forms
-from cabin_APP.models import Region, City, Project, PaymentMethod, MeasureUnit, Worker
+from cabin_APP.models import Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
 
 class FormRegion(forms.ModelForm):
     class Meta:
@@ -32,4 +32,9 @@ class FormUnidadMedida(forms.ModelForm):
 class FormWorker(forms.ModelForm):
     class Meta:
         model = Worker
+        fields = '__all__'
+
+class FormProduct(forms.ModelForm):
+    class Meta:
+        model = Product
         fields = '__all__'

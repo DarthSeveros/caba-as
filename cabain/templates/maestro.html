@@ -16,7 +16,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre Maestro</th>
-                <th>Deuda</th>
+                <th>Contacto</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ maestro.id }}</td>
                 <td>{{ maestro.names}} {{maestro.last_names}}</td>
-                <td>{{ maestro.balance }}</td>
+                <td>{{ maestro.contact}}</td>
                 <td><a href="{% url 'actualizar_maestro' id=maestro.id %}" class="btn btn-success btn-sm float-end"><i class="bi bi-pencil"></i></a></td>
                 <td>
                     <button type="button" onclick="url='{% url "eliminar_maestro" id=maestro.id %}';setIdDelete('{{ maestro.id }}', '{{ maestro.names }} {{ maestro.last_names }}', url);" class="btn btn-danger btn-sm float-start" data-bs-toggle="modal" data-bs-target="#deleteWorkerModal">
