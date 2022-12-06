@@ -4,14 +4,14 @@
 {% block body %}
   <div class="alert alert-info display-1 text-center">Proyectos</div>
 
-{% if proyectos %}
-    {% for proyecto in proyectos %}
+{% if items %}
+    {% for item in items %}
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{ proyecto.project_name}}</h5>
-                <p class="card-text">Superficie: {{proyecto.surface}}</p>
-                <p class="car-text">Costo total: {{proyecto.total_price}}</p>
-                <a href="{% url 'proyecto' id=proyecto.id %}" class="btn btn-primary">Detalles</a>
+                <h5 class="card-title">{{ item.project_name}}</h5>
+                <p class="card-text">Superficie: {{item.surface}}</p>
+                <p class="car-text">Costo total: {{item.total_price}}</p>
+                <a href="{% url 'proyecto' id=item.id %}" class="btn btn-primary">Detalles</a>
             </div>
         </div>
     {% endfor %}
