@@ -21,7 +21,7 @@ def crear_proyecto(request):
 @login_required
 def listado_proyectos(request):
     proyectos = Project.objects.filter(username=request.user)
-    context = {'proyectos': proyectos}
+    context = {'items': proyectos}
     return render(request, 'listado_proyectos.html', context)
 
 @login_required
