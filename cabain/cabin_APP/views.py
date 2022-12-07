@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormBill, FormProduct, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
+from cabin_APP.forms import FormClient, FormBillDetail, FormBill, FormProduct, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
 from cabin_APP.models import Bill, Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
 from django.contrib.auth.decorators import login_required
 
@@ -206,3 +206,27 @@ def listado_factura(request):
     facturas = Bill.objects.filter(username=request.user)
     context = {'items': facturas}
     return render(request, 'listado_facturas.html', context)
+
+@login_required
+def crear_deatalle_factura(request):
+    form = FormBillDetail()
+    if request.method == 'POST':
+        form = FormBillDetail(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(listado_factura)
+    context = {'form': form}
+    return render(request, 'nuevo_cliente.html', context)
+
+@login_required
+def crear_cliente(request):
+    form = FormClient()
+    if request.method == 'POST':
+        form = FormClient(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(listado_factura)
+    context = {'form': form}
+    return render(request, 'nuevo_client.html', context)
+
+
