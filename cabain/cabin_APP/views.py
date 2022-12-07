@@ -216,7 +216,7 @@ def crear_deatalle_factura(request):
             form.save()
             return redirect(listado_factura)
     context = {'form': form}
-    return render(request, 'nuevo_cliente.html', context)
+    return render(request, 'nuevo_detalle_factura.html', context)
 
 @login_required
 def crear_cliente(request):
@@ -227,6 +227,6 @@ def crear_cliente(request):
             form.save()
             return redirect(listado_factura)
     context = {'form': form}
-    return render(request, 'nuevo_client.html', context)
+    return render(request, 'nuevo_cliente.html', context)
 
 
