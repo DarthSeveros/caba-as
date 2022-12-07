@@ -35,5 +35,6 @@ urlpatterns = [
     path('maestro/', views.maestro, name='maestro'),
     path('actualizar_maestro/<int:id>', views.actualizar_maestro, name='actualizar_maestro'),
     path('eliminar_maestro/<int:id>', views.eliminar_maestro, name='eliminar_maestro'),
-    path('sessions/', views.sessions, name='sessions'),
+    path('nueva_factura/', views.crear_factura, name='crear_factura'), 
+    path('listado_factura/', views.listado_factura, name='listado_factura'),
 ]

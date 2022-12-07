@@ -15,11 +15,11 @@
     </div>
     <div class="col">
         <button class="btn p-3 w-100 btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Facturas(no funciona)
+            Facturas
         </button>      
         <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Ver Facturas</button></li>
-            <li><button href="" class="dropdown-item" type="button">Nuevo Proyecto</button></li>
+            <li><a href="{% url 'listado_factura' %}" class="dropdown-item" type="button">ver Factura</a></li>
+            <li><a href="{% url 'crear_factura' %}" class="dropdown-item" type="button">Nueva Factura</a></li>
         </ul>
     </div>
     <div class="col">

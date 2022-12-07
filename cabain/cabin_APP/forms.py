@@ -1,5 +1,5 @@
 from django import forms
-from cabin_APP.models import Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
+from cabin_APP.models import Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker, Bill
 
 class FormRegion(forms.ModelForm):
     class Meta:
@@ -37,4 +37,12 @@ class FormWorker(forms.ModelForm):
 class FormProduct(forms.ModelForm):
     class Meta:
         model = Product
+        fields = '__all__'
+
+class FormBill(forms.ModelForm):
+    class Meta:
+        model = Bill
+        widgets = {
+            'username': forms.HiddenInput
+        }
         fields = '__all__'

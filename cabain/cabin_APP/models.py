@@ -83,6 +83,7 @@ class Bill(models.Model):
     iban = models.CharField(max_length=60, verbose_name='IBAN', blank=True, null=True)
     email = models.EmailField(verbose_name='Correo electrónico', blank=True, null=True)
     phone = models.CharField(max_length=20, verbose_name='Número de contacto')
+    username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario")
 
     def __str__(self):
         return self.bill_number
@@ -120,7 +121,7 @@ class ProjectDetail(models.Model):
 class Worker(models.Model):
     names = models.CharField(max_length=60, verbose_name='Nombre')
     last_names = models.CharField(max_length=60, verbose_name='Apellido')
-    contact = models.IntegerField(max_length=12, verbose_name='Celular')
+    contact = models.IntegerField(verbose_name='Celular')
 
     def __str__(self):
         return f'{self.names} {self.last_names}'

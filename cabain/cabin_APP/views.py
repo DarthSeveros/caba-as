@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormProduct, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
-from cabin_APP.models import Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
+from cabin_APP.forms import FormBill, FormProduct, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
+from cabin_APP.models import Bill, Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -186,3 +186,23 @@ def actualizar_producto(request, id):
     }
     return
 
+
+@login_required
+def crear_factura(request):
+    form = FormBill(initial={'username': request.user})
+    if request.method == 'POST':
+        form = FormBill(request.POST, initial={'username': request.user})
+        if request.user.id != form.data['username']:
+            return redirect(crear_factura)
+        if form.is_valid():
+            form.save()
+            return redirect(listado_factura)
+    context = {'form': form}
+    return render(request, 'nuevaFactura.html', context)
+
+
+@login_required
+def listado_factura(request):
+    facturas = Bill.objects.filter(username=request.user)
+    context = {'items': facturas}
+    return render(request, 'listado_facturas.html', context)
