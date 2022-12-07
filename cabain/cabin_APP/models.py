@@ -79,7 +79,7 @@ class Bill(models.Model):
     total = models.IntegerField(verbose_name='Total')
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE, verbose_name='Método de pago')
     limit_date = models.DateField(verbose_name='Fecha de vencimiento')
-    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, verbose_name='Banaco', blank=True, null=True)
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, verbose_name='Banco', blank=True, null=True)
     iban = models.CharField(max_length=60, verbose_name='IBAN', blank=True, null=True)
     email = models.EmailField(verbose_name='Correo electrónico', blank=True, null=True)
     phone = models.CharField(max_length=20, verbose_name='Número de contacto')
