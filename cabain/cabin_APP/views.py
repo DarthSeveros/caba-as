@@ -67,6 +67,8 @@ def proyecto(request, id):
     }
     return render(request, 'proyecto.html', context)
 
+###DETALLE PROYECTO###
+
 ###METODO DE PAGO###
 
 @login_required
@@ -248,6 +250,10 @@ def listado_factura(request):
     context = {'items': facturas}
     return render(request, 'listado_facturas.html', context)
 
+
+###DETALLE DE FACTURA###
+
+
 @login_required
 def crear_deatalle_factura(request):
     form = FormBillDetail(initial={'user': request.user})
@@ -259,6 +265,10 @@ def crear_deatalle_factura(request):
     context = {'form': form}
     return render(request, 'nuevo_detalle_factura.html', context)
 
+
+###CLIENTE###
+
+
 @login_required
 def crear_cliente(request):
     form = FormClient(initial={'user': request.user})
@@ -269,6 +279,12 @@ def crear_cliente(request):
             return redirect(listado_factura)
     context = {'form': form}
     return render(request, 'nuevo_cliente.html', context)
+
+
+
+###TRABAJO MAESTRO###
+
+
 
 
 
