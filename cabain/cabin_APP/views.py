@@ -6,6 +6,39 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
+###MENU###
+
+@login_required
+def main_menu(request):
+    return render(request, 'menu_principal.html')
+
+
+###REGISTRO###
+
+
+def registrarse(request):
+    form = FormUser()
+    if request.method == 'POST':
+        form = FormUser(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            firs_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            user = User(username=username, first_name=firs_name, last_name=last_name, email=email)
+            user.set_password(password)
+            user.save()
+            return redirect(main_menu)
+    context = {
+        'form': form
+    }
+    return render(request, 'registro.html', context)
+
+
+###PROYECTO###
+
+
 @login_required
 def crear_proyecto(request):
     form = FormCreateProject(initial={'username': request.user})
@@ -26,8 +59,15 @@ def listado_proyectos(request):
     return render(request, 'listado_proyectos.html', context)
 
 @login_required
-def main_menu(request):
-    return render(request, 'menu_principal.html')
+def proyecto(request, id):
+    proyecto = Project.objects.get(id=id)
+    nombre_proyecto = proyecto.project_name
+    context = {
+        'nombre_proyecto': nombre_proyecto
+    }
+    return render(request, 'proyecto.html', context)
+
+###METODO DE PAGO###
 
 @login_required
 def payment_method(request):
@@ -68,6 +108,9 @@ def actualizar_metodo_pago(request, id):
     }
     return render(request, 'actualizar_metodo_pago.html', context)
 
+
+###UNIDAD DE MEDIDA###
+
 @login_required
 def unidad_medida(request):
     form = FormUnidadMedida(initial={'user': request.user})
@@ -105,6 +148,9 @@ def eliminar_unidad_medida(request, id):
     unidad.delete()
     return redirect(unidad_medida)
 
+
+###MAESTROS###
+
 @login_required
 def maestro(request):
     form = FormWorker(initial={'user': request.user})
@@ -138,14 +184,9 @@ def eliminar_maestro(request, id):
     worker.delete()
     return redirect(maestro)
 
-@login_required
-def proyecto(request, id):
-    proyecto = Project.objects.get(id=id)
-    nombre_proyecto = proyecto.project_name
-    context = {
-        'nombre_proyecto': nombre_proyecto
-    }
-    return render(request, 'proyecto.html', context)
+
+###PRODUCTO###
+
 
 @login_required
 def producto(request):
@@ -182,6 +223,9 @@ def actualizar_producto(request, id):
         'form': form
     }
     return
+
+
+###FACTURA###
 
 
 @login_required
@@ -227,22 +271,5 @@ def crear_cliente(request):
     return render(request, 'nuevo_cliente.html', context)
 
 
-def registrarse(request):
-    form = FormUser()
-    if request.method == 'POST':
-        form = FormUser(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            firs_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            user = User(username=username, first_name=firs_name, last_name=last_name, email=email)
-            user.set_password(password)
-            user.save()
-            return redirect(main_menu)
-    context = {
-        'form': form
-    }
-    return render(request, 'registro.html', context)
+
 
