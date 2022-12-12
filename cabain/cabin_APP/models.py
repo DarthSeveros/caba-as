@@ -88,8 +88,7 @@ class Bill(models.Model):
     iban = models.CharField(max_length=60, verbose_name='IBAN', blank=True, null=True)
     email = models.EmailField(verbose_name='Correo electrónico', blank=True, null=True)
     phone = models.CharField(max_length=20, verbose_name='Número de contacto')
-    username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario")
-
+    
     def __str__(self):
         return self.bill_number
 
@@ -108,7 +107,6 @@ class BillDetail(models.Model):
         return f'{self.bill}-{self.correlative}'
     
 class Project(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=60, verbose_name='Nombre Proyecto')
     surface = models.IntegerField(verbose_name='Superficie(m2)')
     total_price = models.IntegerField(verbose_name='Presupuesto', blank=True, null=True)

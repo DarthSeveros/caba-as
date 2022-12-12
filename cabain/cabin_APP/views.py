@@ -11,7 +11,7 @@ def crear_proyecto(request):
     form = FormCreateProject(initial={'username': request.user})
     if request.method == 'POST':
         form = FormCreateProject(request.POST, initial={'username': request.user})
-        if request.user.id != form.data['username']:
+        if request.user.id != int(form.data['username']):
             return redirect(crear_proyecto)
         if form.is_valid():
             form.save()
