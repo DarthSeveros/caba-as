@@ -186,10 +186,10 @@ def actualizar_producto(request, id):
 
 @login_required
 def crear_factura(request):
-    form = FormBill(initial={'username': request.user})
+    form = FormBill(initial={'user': request.user})
     if request.method == 'POST':
-        form = FormBill(request.POST, initial={'username': request.user})
-        if request.user.id != form.data['username']:
+        form = FormBill(request.POST, initial={'user': request.user})
+        if request.user.id != int(form.data['user']):
             return redirect(crear_factura)
         if form.is_valid():
             form.save()
@@ -200,7 +200,7 @@ def crear_factura(request):
 
 @login_required
 def listado_factura(request):
-    facturas = Bill.objects.filter(username=request.user)
+    facturas = Bill.objects.filter(user=request.user)
     context = {'items': facturas}
     return render(request, 'listado_facturas.html', context)
 

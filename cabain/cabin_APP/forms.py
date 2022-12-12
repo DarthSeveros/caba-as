@@ -32,7 +32,7 @@ class FormPaymentMethod(forms.ModelForm):
     class Meta:
         model = PaymentMethod
         widgets = {
-            'username': forms.HiddenInput
+            'user': forms.HiddenInput
         }
         fields = '__all__'
 
@@ -40,7 +40,7 @@ class FormUnidadMedida(forms.ModelForm):
     class Meta:
         model = MeasureUnit
         widgets = {
-            'username': forms.HiddenInput
+            'user': forms.HiddenInput
         }
         fields = '__all__'
 
@@ -48,7 +48,7 @@ class FormWorker(forms.ModelForm):
     class Meta:
         model = Worker
         widgets = {
-            'username': forms.HiddenInput
+            'user': forms.HiddenInput
         }
         fields = '__all__'
 
@@ -56,7 +56,7 @@ class FormProduct(forms.ModelForm):
     class Meta:
         model = Product
         widgets = {
-            'username': forms.HiddenInput
+            'user': forms.HiddenInput
         }
         fields = '__all__'
 
@@ -64,7 +64,7 @@ class FormBill(forms.ModelForm):
     class Meta:
         model = Bill
         widgets = {
-            'username': forms.HiddenInput
+            'user': forms.HiddenInput
         }
         fields = '__all__'
 
@@ -72,7 +72,7 @@ class FormBillDetail(forms.ModelForm):
     class Meta:
         model = BillDetail
         widgets = {
-            'username': forms.HiddenInput
+            'user': forms.HiddenInput
         }
         fields = '__all__'
 
@@ -80,6 +80,6 @@ class FormClient(forms.ModelForm):
     class Meta:
         model = Client
         widgets = {
-            'username': forms.HiddenInput
+            'user': forms.HiddenInput
         }
         fields = '__all__'
