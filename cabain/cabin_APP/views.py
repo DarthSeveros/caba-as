@@ -21,7 +21,7 @@ def crear_proyecto(request):
 
 @login_required
 def listado_proyectos(request):
-    proyectos = Project.objects.filter(username=request.user)
+    proyectos = Project.objects.filter(user=request.user)
     context = {'items': proyectos}
     return render(request, 'listado_proyectos.html', context)
 
@@ -31,10 +31,10 @@ def main_menu(request):
 
 @login_required
 def payment_method(request):
-    form = FormPaymentMethod(initial={'username': request.user})
+    form = FormPaymentMethod(initial={'user': request.user})
     if request.method == 'POST':
-        form = FormPaymentMethod(request.POST, initial={'username': request.user})
-        if request.user.id != form.data['username']:
+        form = FormPaymentMethod(request.POST, initial={'user': request.user})
+        if request.user.id != int(form.data['user']):
             return redirect(payment_method)
         if form.is_valid():
             form.save()
@@ -61,7 +61,7 @@ def actualizar_metodo_pago(request, id):
         if form.is_valid():
             form.save()
             return redirect(payment_method)
-    metodos = PaymentMethod.objects.all()
+    metodos = PaymentMethod.objects.filter(user=request.user)
     context = {
         'form': form,
         'metodos': metodos
@@ -70,9 +70,9 @@ def actualizar_metodo_pago(request, id):
 
 @login_required
 def unidad_medida(request):
-    form = FormUnidadMedida(initial={'username': request.user})
+    form = FormUnidadMedida(initial={'user': request.user})
     if request.method == 'POST':
-        form = FormUnidadMedida(request.POST, initial={'username': request.user})
+        form = FormUnidadMedida(request.POST, initial={'user': request.user})
         if form.is_valid():
             form.save()
             return redirect(unidad_medida)
@@ -107,10 +107,10 @@ def eliminar_unidad_medida(request, id):
 
 @login_required
 def maestro(request):
-    form = FormWorker()
+    form = FormWorker(initial={'user': request.user})
     maestros = Worker.objects.all()
     if request.method == 'POST':
-        form = FormWorker(request.POST)
+        form = FormWorker(request.POST, initial={'user': request.user})
         if form.is_valid():
             form.save()
             return redirect(maestro)
@@ -149,10 +149,10 @@ def proyecto(request, id):
 
 @login_required
 def producto(request):
-    productos = Product.objects.all()
-    form = FormProduct()
+    productos = Product.objects.get(user=request.user)
+    form = FormProduct(initial={'user': request.user})
     if request.method == 'POST':
-        form = FormProduct(request.POST)
+        form = FormProduct(request.POST, initial={'user': request.user})
         if form.is_valid:
             form.save()
             return redirect(producto)
@@ -206,9 +206,9 @@ def listado_factura(request):
 
 @login_required
 def crear_deatalle_factura(request):
-    form = FormBillDetail()
+    form = FormBillDetail(initial={'user': request.user})
     if request.method == 'POST':
-        form = FormBillDetail(request.POST)
+        form = FormBillDetail(request.POST, initial={'user': request.user})
         if form.is_valid():
             form.save()
             return redirect(listado_factura)
@@ -217,9 +217,9 @@ def crear_deatalle_factura(request):
 
 @login_required
 def crear_cliente(request):
-    form = FormClient()
+    form = FormClient(initial={'user': request.user})
     if request.method == 'POST':
-        form = FormClient(request.POST)
+        form = FormClient(request.POST, initial={'user': request.user})
         if form.is_valid():
             form.save()
             return redirect(listado_factura)
