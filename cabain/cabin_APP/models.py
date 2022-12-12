@@ -58,23 +58,30 @@ class Client(models.Model):
     client_rut = models.CharField(max_length=12, verbose_name='Rut Cliente')
     client_name = models.CharField(max_length=60, verbose_name='Nombre')
     client_last_name = models.CharField(max_length=60, verbose_name='Apellido')
-    client_city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Ciudad cliente')
-    client_commune = models.ForeignKey(Commune, on_delete=models.CASCADE, verbose_name='Comuna cliente')
-    client_address = models.CharField(max_length=60, verbose_name='Dirección cliente')
+    client_city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Ciudad')
+    client_commune = models.ForeignKey(Commune, on_delete=models.CASCADE, verbose_name='Comuna')
+    client_address = models.CharField(max_length=60, verbose_name='Dirección')
 
     def __str__(self):
-        return f''
+        return self.client_name
+
+class Proveedor(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rut = models.CharField(max_length=12, verbose_name='Rut Proveedor')
+    name = models.CharField(max_length=60, verbose_name='Nombre')
+    last_name = models.CharField(max_length=60, verbose_name='Apellido')
+    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Ciudad')
+    commune = models.ForeignKey(Commune, on_delete=models.CASCADE, verbose_name='Comuna')
+    address = models.CharField(max_length=60, verbose_name='Dirección')
+    
+    def __str__(self):
+        return self.name
 
 class Bill(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     bill_number = models.IntegerField(verbose_name='Número de factura')
     emision_date = models.DateTimeField(verbose_name='Fecha de emisión')
-    supplier_rut = models.CharField(max_length=12, verbose_name='Rut proveedor')
-    supplier_names = models.CharField(max_length=60, verbose_name='Nombre proveedor')
-    supplier_last_names = models.CharField(max_length=60, verbose_name='Apellidos proveedor', blank=True, null=True)
-    supplier_city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Ciudad proveedor')
-    supplier_commune = models.ForeignKey(Commune, on_delete=models.CASCADE, verbose_name='Comuna')
-    supplier_address = models.CharField(max_length=60, verbose_name='Dirección proveedor')
+    supplier = models.ForeignKey(Proveedor, on_delete=models.CASCADE, verbose_name='Proveedor')
     client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
     seller_name = models.CharField(max_length=60, verbose_name='Nombre vendedor')
     seller_last_name = models.CharField(max_length=60, verbose_name='Apellido vendedor')
@@ -88,7 +95,7 @@ class Bill(models.Model):
     iban = models.CharField(max_length=60, verbose_name='IBAN', blank=True, null=True)
     email = models.EmailField(verbose_name='Correo electrónico', blank=True, null=True)
     phone = models.CharField(max_length=20, verbose_name='Número de contacto')
-    
+
     def __str__(self):
         return self.bill_number
 
