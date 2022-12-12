@@ -21,7 +21,7 @@ def crear_proyecto(request):
 
 @login_required
 def listado_proyectos(request):
-    proyectos = Project.objects.filter(user=request.user)
+    proyectos = Project.objects.filter(username=request.user)
     context = {'items': proyectos}
     return render(request, 'listado_proyectos.html', context)
 
@@ -149,7 +149,7 @@ def proyecto(request, id):
 
 @login_required
 def producto(request):
-    productos = Product.objects.get(user=request.user)
+    productos = Product.objects.filter(user=request.user)
     form = FormProduct(initial={'user': request.user})
     if request.method == 'POST':
         form = FormProduct(request.POST, initial={'user': request.user})
