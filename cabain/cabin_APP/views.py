@@ -6,14 +6,14 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-###MENU###
+########################MENU################################
 
 @login_required
 def main_menu(request):
     return render(request, 'menu_principal.html')
 
 
-###REGISTRO###
+######################REGISTRO###############################
 
 
 def registrarse(request):
@@ -36,7 +36,7 @@ def registrarse(request):
     return render(request, 'registro.html', context)
 
 
-###PROYECTO###
+####################PROYECTO##################################
 
 
 @login_required
@@ -67,9 +67,9 @@ def proyecto(request, id):
     }
     return render(request, 'proyecto.html', context)
 
-###DETALLE PROYECTO###
+###############DETALLE PROYECTO#################################
 
-###METODO DE PAGO###
+#################METODO DE PAGO#################################
 
 @login_required
 def payment_method(request):
@@ -111,7 +111,7 @@ def actualizar_metodo_pago(request, id):
     return render(request, 'actualizar_metodo_pago.html', context)
 
 
-###UNIDAD DE MEDIDA###
+################UNIDAD DE MEDIDA################################
 
 @login_required
 def unidad_medida(request):
@@ -151,7 +151,7 @@ def eliminar_unidad_medida(request, id):
     return redirect(unidad_medida)
 
 
-###MAESTROS###
+#######################MAESTROS##########################################
 
 @login_required
 def maestro(request):
@@ -187,7 +187,7 @@ def eliminar_maestro(request, id):
     return redirect(maestro)
 
 
-###PRODUCTO###
+#################PRODUCTO#################################################
 
 
 @login_required
@@ -227,7 +227,7 @@ def actualizar_producto(request, id):
     return
 
 
-###FACTURA###
+###################FACTURA#################################################
 
 
 @login_required
@@ -251,7 +251,7 @@ def listado_factura(request):
     return render(request, 'listado_facturas.html', context)
 
 
-###DETALLE DE FACTURA###
+################DETALLE DE FACTURA############################################
 
 
 @login_required
@@ -266,7 +266,7 @@ def crear_deatalle_factura(request):
     return render(request, 'nuevo_detalle_factura.html', context)
 
 
-###CLIENTE###
+#####################CLIENTE###################################################
 
 
 @login_required
@@ -282,7 +282,7 @@ def crear_cliente(request):
 
 
 
-###TRABAJO MAESTRO###
+###################TRABAJO MAESTRO##############################################
 
 
 
