@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
 # Create your models here.
 
@@ -23,19 +23,21 @@ class Commune(models.Model):
     def __str__(self):
         return self.commune_name
 
-class PaymentMethod(models.Model):
-    payment_name = models.CharField(max_length=30, verbose_name='Método de pago')
-
-    def __str__(self):
-        return self.payment_name
-
 class Bank(models.Model):
     bank_name = models.CharField(max_length=30, verbose_name='Banco')
 
     def __str__(self):
         return self.bank_name
 
+class PaymentMethod(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    payment_name = models.CharField(max_length=30, verbose_name='Método de pago')
+
+    def __str__(self):
+        return self.payment_name
+
 class MeasureUnit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     unit_name = models.CharField(max_length=20, verbose_name='Unidad de medida')
     symbol = models.CharField(max_length=20, verbose_name='Símbolo')
 
@@ -43,6 +45,7 @@ class MeasureUnit(models.Model):
         return self.symbol
 
 class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=30, verbose_name='Nombre del producto')
     measure_unit = models.ForeignKey(MeasureUnit, on_delete=models.CASCADE, verbose_name='Unidad de medida')
     category = models.CharField(max_length=30, verbose_name='Categoría')
@@ -51,6 +54,7 @@ class Product(models.Model):
         return self.product_name
 
 class Client(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     client_rut = models.CharField(max_length=12, verbose_name='Rut Cliente')
     client_name = models.CharField(max_length=60, verbose_name='Nombre')
     client_last_name = models.CharField(max_length=60, verbose_name='Apellido')
@@ -62,6 +66,7 @@ class Client(models.Model):
         return f''
 
 class Bill(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     bill_number = models.IntegerField(verbose_name='Número de factura')
     emision_date = models.DateTimeField(verbose_name='Fecha de emisión')
     supplier_rut = models.CharField(max_length=12, verbose_name='Rut proveedor')
@@ -89,6 +94,7 @@ class Bill(models.Model):
         return self.bill_number
 
 class BillDetail(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     bill = models.ForeignKey(Bill, on_delete=models.CASCADE, verbose_name='Número factura')
     correlative = models.IntegerField(verbose_name='Correlativo')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Producto')
@@ -102,6 +108,7 @@ class BillDetail(models.Model):
         return f'{self.bill}-{self.correlative}'
     
 class Project(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=60, verbose_name='Nombre Proyecto')
     surface = models.IntegerField(verbose_name='Superficie(m2)')
     total_price = models.IntegerField(verbose_name='Presupuesto', blank=True, null=True)
@@ -111,6 +118,7 @@ class Project(models.Model):
         return self.project_name
 
 class ProjectDetail(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Proyecto')
     product = models.ForeignKey(BillDetail, on_delete=models.CASCADE, verbose_name='Producto')
     quantity = models.IntegerField(verbose_name='Cantidad')
@@ -119,6 +127,7 @@ class ProjectDetail(models.Model):
         return f'{self.project}-{self.product}'
 
 class Worker(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     names = models.CharField(max_length=60, verbose_name='Nombre')
     last_names = models.CharField(max_length=60, verbose_name='Apellido')
     contact = models.IntegerField(verbose_name='Celular')
@@ -127,6 +136,7 @@ class Worker(models.Model):
         return f'{self.names} {self.last_names}'
     
 class ProjectWorker(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Proyecto')
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE, verbose_name='Trabajador')
     work = models.CharField(max_length=60, verbose_name='Trabajo')

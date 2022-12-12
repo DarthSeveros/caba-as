@@ -18,6 +18,7 @@ from django.urls import include, path
 from cabin_APP import views
 
 urlpatterns = [
+    path('registro/', views.registrarse, name='registro'),
     path('nuevo_cliente', views.crear_cliente, name='crear_cliente'),
     path('nuevo_detalle_factura', views.crear_deatalle_factura, name='nuevo_detalle_factura'),
     path('producto/', views.producto, name='producto'),

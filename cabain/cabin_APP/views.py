@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormClient, FormBillDetail, FormBill, FormProduct, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
+from cabin_APP.forms import FormUser, FormClient, FormBillDetail, FormBill, FormProduct, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
 from cabin_APP.models import Bill, Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -30,9 +31,11 @@ def main_menu(request):
 
 @login_required
 def payment_method(request):
-    form = FormPaymentMethod()
+    form = FormPaymentMethod(initial={'username': request.user})
     if request.method == 'POST':
-        form = FormPaymentMethod(request.POST)
+        form = FormPaymentMethod(request.POST, initial={'username': request.user})
+        if request.user.id != form.data['username']:
+            return redirect(payment_method)
         if form.is_valid():
             form.save()
             return redirect(payment_method)
@@ -67,9 +70,9 @@ def actualizar_metodo_pago(request, id):
 
 @login_required
 def unidad_medida(request):
-    form = FormUnidadMedida()
+    form = FormUnidadMedida(initial={'username': request.user})
     if request.method == 'POST':
-        form = FormUnidadMedida(request.POST)
+        form = FormUnidadMedida(request.POST, initial={'username': request.user})
         if form.is_valid():
             form.save()
             return redirect(unidad_medida)
@@ -133,12 +136,6 @@ def actualizar_maestro(request, id):
 def eliminar_maestro(request, id):
     worker = Worker.objects.get(id=id)
     worker.delete()
-    return redirect(maestro)
-
-@login_required
-def sessions(request):
-    auto = request.session['auto']
-    print(auto)
     return redirect(maestro)
 
 @login_required
@@ -229,4 +226,23 @@ def crear_cliente(request):
     context = {'form': form}
     return render(request, 'nuevo_cliente.html', context)
 
+
+def registrarse(request):
+    form = FormUser()
+    if request.method == 'POST':
+        form = FormUser(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            firs_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            user = User(username=username, first_name=firs_name, last_name=last_name, email=email)
+            user.set_password(password)
+            user.save()
+            return redirect(main_menu)
+    context = {
+        'form': form
+    }
+    return render(request, 'registro.html', context)
 

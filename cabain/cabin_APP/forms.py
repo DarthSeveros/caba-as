@@ -1,5 +1,14 @@
 from django import forms
 from cabin_APP.models import Client, BillDetail, Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker, Bill
+from django.contrib.auth.models import User
+
+class FormUser(forms.ModelForm):
+    class Meta:
+        model = User
+        widgets = {
+            'password': forms.PasswordInput
+        }
+        fields = ['password', 'username', 'first_name', 'last_name', 'email']
 
 class FormRegion(forms.ModelForm):
     class Meta:
@@ -22,21 +31,33 @@ class FormCreateProject(forms.ModelForm):
 class FormPaymentMethod(forms.ModelForm):
     class Meta:
         model = PaymentMethod
+        widgets = {
+            'username': forms.HiddenInput
+        }
         fields = '__all__'
 
 class FormUnidadMedida(forms.ModelForm):
     class Meta:
         model = MeasureUnit
+        widgets = {
+            'username': forms.HiddenInput
+        }
         fields = '__all__'
 
 class FormWorker(forms.ModelForm):
     class Meta:
         model = Worker
+        widgets = {
+            'username': forms.HiddenInput
+        }
         fields = '__all__'
 
 class FormProduct(forms.ModelForm):
     class Meta:
         model = Product
+        widgets = {
+            'username': forms.HiddenInput
+        }
         fields = '__all__'
 
 class FormBill(forms.ModelForm):
@@ -50,9 +71,15 @@ class FormBill(forms.ModelForm):
 class FormBillDetail(forms.ModelForm):
     class Meta:
         model = BillDetail
+        widgets = {
+            'username': forms.HiddenInput
+        }
         fields = '__all__'
 
 class FormClient(forms.ModelForm):
     class Meta:
         model = Client
+        widgets = {
+            'username': forms.HiddenInput
+        }
         fields = '__all__'
