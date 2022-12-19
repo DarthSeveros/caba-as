@@ -19,8 +19,15 @@ from cabin_APP import views
 
 urlpatterns = [
     path('registro/', views.registrarse, name='registro'),
-    path('nuevo_cliente', views.crear_cliente, name='crear_cliente'),
-    path('nuevo_detalle_factura', views.crear_deatalle_factura, name='nuevo_detalle_factura'),
+
+    path('nuevo_cliente/', views.crear_cliente, name='crear_cliente'),
+    
+    path('nuevo_proveedor/', views.crear_proveedor, name='crear_proveedor'),
+
+    path('nuevo_detalle_factura/', views.crear_deatalle_factura, name='nuevo_detalle_factura'),
+    path('detalle_factura/<int:id>', views.detalle_factura, name='detalle_factura'),
+    path('eliminar_detalle_factura/<int:id>', views.eliminar_detalle_factura, name='eliminar_detalle_factura'),
+
     path('producto/', views.producto, name='producto'),
     path('eliminar_producto/<int:id>', views.eliminar_producto, name='eliminar_producto'),
 

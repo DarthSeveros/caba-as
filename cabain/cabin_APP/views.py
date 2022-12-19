@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from cabin_APP.forms import FormUser, FormClient, FormBillDetail, FormBill, FormProduct, FormCreateProject, FormPaymentMethod, FormUnidadMedida, FormWorker
+from .forms import *
 from cabin_APP.models import Bill, Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -239,7 +239,8 @@ def crear_factura(request):
             return redirect(crear_factura)
         if form.is_valid():
             form.save()
-            return redirect(listado_factura)
+            id_bill = Bill.objects.filter(bill_number=form.data['bill_number'])[0].id 
+            return redirect(detalle_factura, id=id_bill)
     context = {'form': form}
     return render(request, 'nuevaFactura.html', context)
 
@@ -265,6 +266,33 @@ def crear_deatalle_factura(request):
     context = {'form': form}
     return render(request, 'nuevo_detalle_factura.html', context)
 
+@login_required
+def eliminar_detalle_factura(request, id):
+    bill = Bill.objects.get(id=id)
+    bill.delete()
+    return redirect(detalle_factura)
+
+@login_required
+def detalle_factura(request, id):
+    bill = Bill.objects.get(id=id)
+    initial={
+            'user': request.user, 
+            'bill': bill
+            }
+    detalle = BillDetail.objects.filter(user=request.user, bill=bill)
+    form = FormBillDetail(initial=initial)
+    if request.method == 'POST':
+        form = FormBillDetail(request.POST, initial=initial)
+        if form.is_valid():
+            form.save()
+            return redirect(detalle_factura, id=id)
+    context = {
+        'form': form,
+        'items': detalle,
+        'bill': bill
+    }
+    return render(request, 'listado_detalle_factura.html', context)
+
 
 #####################CLIENTE###################################################
 
@@ -279,6 +307,23 @@ def crear_cliente(request):
             return redirect(listado_factura)
     context = {'form': form}
     return render(request, 'nuevo_cliente.html', context)
+
+
+
+####################PROVEEDOR###################################################
+
+
+@login_required
+def crear_proveedor(request):
+    form = FormProveedor(initial={'user': request.user})
+    if request.method == 'POST':
+        form = FormProveedor(request.POST, initial={'user': request.user})
+        if form.is_valid():
+            form.save()
+            return redirect(listado_factura)
+    context = {'form': form}
+    return render(request, 'nuevo_proveedor.html', context)
+
 
 
 
