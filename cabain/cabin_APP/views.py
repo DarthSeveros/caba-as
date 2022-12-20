@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import *
-from cabin_APP.models import Bill, Product, Region, City, Project, PaymentMethod, MeasureUnit, Worker
+from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -61,13 +61,40 @@ def listado_proyectos(request):
 @login_required
 def proyecto(request, id):
     proyecto = Project.objects.get(id=id)
-    nombre_proyecto = proyecto.project_name
+    materiales = ProjectDetail.objects.filter(user=request.user, project=proyecto)
+    trabajos = ProjectWorker.objects.filter(user=request.user, project=proyecto)
+    form_material = FormProjectDetail(initial={'user':request.user,'project':proyecto})
+    form_trabajo = FormProjectWorker(initial={'user':request.user,'project':proyecto})
     context = {
-        'nombre_proyecto': nombre_proyecto
+        'proyecto': proyecto,
+        'materiales': materiales,
+        'trabajos': trabajos,
+        'form_material': form_material,
+        'form_trabajo': form_trabajo
     }
     return render(request, 'proyecto.html', context)
 
-###############DETALLE PROYECTO#################################
+@login_required
+def crear_material(request,id):
+    proyecto_selec = Project.objects.get(id=id)
+    if request.method == 'POST':
+        form_material = FormProjectDetail(request.POST, initial={'user':request.user,'project':proyecto_selec})
+        if form_material.is_valid():
+            form_material.save()
+            return redirect(proyecto, id=id)
+    return redirect(proyecto, id=id)
+
+@login_required
+def crear_trabajo(request,id):
+    proyecto_selec = Project.objects.get(id=id)
+    if request.method == 'POST':
+        form = FormProjectWorker(request.POST, initial={'user':request.user,'project':proyecto_selec})
+        if form.is_valid():
+            form.save()
+            return redirect(proyecto, id=id)
+    return redirect(proyecto, id=id)
+
+
 
 #################METODO DE PAGO#################################
 
@@ -323,13 +350,6 @@ def crear_proveedor(request):
             return redirect(listado_factura)
     context = {'form': form}
     return render(request, 'nuevo_proveedor.html', context)
-
-
-
-
-###################TRABAJO MAESTRO##############################################
-
-
 
 
 

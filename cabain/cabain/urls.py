@@ -33,9 +33,15 @@ urlpatterns = [
 
     path('cuenta/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+
     path('proyecto_nuevo/', views.crear_proyecto, name='crear_proyecto'),
     path('listado_proyecto/', views.listado_proyectos, name='listado_proyectos'),
     path('proyecto/<int:id>', views.proyecto, name='proyecto'),
+
+    path('nuevo_material/<int:id>', views.crear_material, name='crear_material'),
+
+    path('nuevo_trabajo/<int:id>', views.crear_trabajo, name='crear_trabajo'),
+
     path('menu/', views.main_menu, name='menu_principal'),
     
     path('payment_method/', views.payment_method , name='payment_method'),
@@ -52,4 +58,5 @@ urlpatterns = [
     
     path('nueva_factura/', views.crear_factura, name='crear_factura'), 
     path('listado_factura/', views.listado_factura, name='listado_factura'),
+
 ]

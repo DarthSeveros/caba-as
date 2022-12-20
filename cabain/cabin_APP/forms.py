@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth.models import User
 
 class FormUser(forms.ModelForm):
+    #contrasena2 = forms.CharField(max_length=100)
     class Meta:
         model = User
         widgets = {
@@ -97,6 +98,22 @@ class FormClient(forms.ModelForm):
 class FormProveedor(forms.ModelForm):
     class Meta:
         model = Proveedor
+        widgets = {
+            'user': forms.HiddenInput
+        }
+        fields = '__all__'
+
+class FormProjectDetail(forms.ModelForm):
+    class Meta:
+        model = ProjectDetail
+        widgets = {
+            'user': forms.HiddenInput
+        }
+        fields = '__all__'
+
+class FormProjectWorker(forms.ModelForm):
+    class Meta:
+        model = ProjectWorker
         widgets = {
             'user': forms.HiddenInput
         }
