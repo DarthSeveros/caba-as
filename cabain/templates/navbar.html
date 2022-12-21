@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="{% url 'menu_principal' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <img src="{% static 'img/logo.png' %}" alt="cabin" width="100">
+      <span class="fs-4 wood-font">WoodHouse Cabañas</span>
+    </a>
+
+    <ul class="nav nav-pills align-self-center" style="font-size: 1.5rem; link-color:black">
+      <li class="nav-item"><a class="nav-link" style="color: #700000" href="{% url 'menu_principal' %}">Inicio</a></li>
+      <li class="nav-item"><a class="nav-link" style="color: #700000" href="{% url 'listado_proyectos' %}">Mis proyectos</a></li>
+      <li class="nav-item"><a class="nav-link" style="color: #700000" href="{% url 'listado_factura' %}">Mis facturas</a></li>
+      <li class="nav-item"><a class="nav-link" style="color: #700000" href="{% url 'maestro' %}">Mis maestros</a></li>
+      <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle" style="color: #700000" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Otros
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'crear_cliente' %}">Nuevo cliente</a></li>
+          <li><a class="dropdown-item" href="{% url 'unidad_medida' %}">Unidades de medida</a></li>
+          <li><a class="dropdown-item" href="{% url 'payment_method' %}">Metodos de pago</a></li>
+        </ul>
+      </li>
+    </ul>
+  </header>
+</div>

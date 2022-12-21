@@ -79,16 +79,16 @@ class Proveedor(models.Model):
 
 class Bill(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    bill_number = models.IntegerField(verbose_name='Número de factura', unique=True)
+    bill_number = models.PositiveIntegerField(verbose_name='Número de factura', unique=True)
     emision_date = models.DateTimeField(verbose_name='Fecha de emisión')
     supplier = models.ForeignKey(Proveedor, on_delete=models.CASCADE, verbose_name='Proveedor')
     client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
     seller_name = models.CharField(max_length=60, verbose_name='Nombre vendedor')
     seller_last_name = models.CharField(max_length=60, verbose_name='Apellido vendedor')
     observations = models.CharField(max_length=120, verbose_name='Observaciones', blank=True, null=True)
-    subtotal = models.IntegerField(verbose_name='Subtotal')
-    iva = models.IntegerField(verbose_name='IVA')
-    total = models.IntegerField(verbose_name='Total')
+    subtotal = models.PositiveIntegerField(verbose_name='Subtotal')
+    iva = models.PositiveIntegerField(verbose_name='IVA')
+    total = models.PositiveIntegerField(verbose_name='Total')
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE, verbose_name='Método de pago')
     limit_date = models.DateField(verbose_name='Fecha de vencimiento')
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, verbose_name='Banco', blank=True, null=True)
@@ -102,21 +102,21 @@ class Bill(models.Model):
 class BillDetail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     bill = models.ForeignKey(Bill, on_delete=models.CASCADE, verbose_name='Número factura')
-    correlative = models.IntegerField(verbose_name='Correlativo', unique=True)
+    correlative = models.PositiveIntegerField(verbose_name='Correlativo', unique=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Producto')
     description = models.CharField(max_length=120 , verbose_name='Descripción', blank=True, null=True)
-    quantity = models.IntegerField(verbose_name='Cantidad')
-    unitary_price = models.IntegerField(verbose_name='Precio unitario')
-    discount = models.IntegerField(verbose_name='Descuento')
-    total = models.IntegerField(verbose_name='Total')
+    quantity = models.PositiveIntegerField(verbose_name='Cantidad')
+    unitary_price = models.PositiveIntegerField(verbose_name='Precio unitario')
+    discount = models.PositiveIntegerField(verbose_name='Descuento')
+    total = models.PositiveIntegerField(verbose_name='Total')
 
     def __str__(self):
-        return f'{self.bill}-{self.correlative}'
+        return f'{self.bill}-{self.correlative}-{self.product}'
     
 class Project(models.Model):
     project_name = models.CharField(max_length=60, verbose_name='Nombre Proyecto')
-    surface = models.IntegerField(verbose_name='Superficie(m2)')
-    total_price = models.IntegerField(verbose_name='Presupuesto', blank=True, null=True)
+    surface = models.PositiveIntegerField(verbose_name='Superficie(m2)')
+    total_price = models.PositiveIntegerField(verbose_name='Presupuesto', blank=True, null=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuario')
 
     def __str__(self):
@@ -126,7 +126,7 @@ class ProjectDetail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Proyecto')
     product = models.ForeignKey(BillDetail, on_delete=models.CASCADE, verbose_name='Producto')
-    quantity = models.IntegerField(verbose_name='Cantidad')
+    quantity = models.PositiveIntegerField(verbose_name='Cantidad')
 
     def __str__(self):
         return f'{self.project}-{self.product}'
@@ -135,7 +135,7 @@ class Worker(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     names = models.CharField(max_length=60, verbose_name='Nombre')
     last_names = models.CharField(max_length=60, verbose_name='Apellido')
-    contact = models.IntegerField(verbose_name='Celular')
+    contact = models.PositiveIntegerField(verbose_name='Celular')
 
     def __str__(self):
         return f'{self.names} {self.last_names}'
@@ -145,5 +145,5 @@ class ProjectWorker(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Proyecto')
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE, verbose_name='Trabajador')
     work = models.CharField(max_length=60, verbose_name='Trabajo')
-    payment = models.IntegerField(verbose_name='Costo')
-    balance = models.IntegerField(verbose_name='Deuda')
+    payment = models.PositiveIntegerField(verbose_name='Costo')
+    balance = models.PositiveIntegerField(verbose_name='Deuda')

@@ -39,8 +39,10 @@ urlpatterns = [
     path('proyecto/<int:id>', views.proyecto, name='proyecto'),
 
     path('nuevo_material/<int:id>', views.crear_material, name='crear_material'),
+    path('eliminar_material/<int:id_material>&<int:id_proyecto>', views.eliminar_material, name='eliminar_material'),
 
     path('nuevo_trabajo/<int:id>', views.crear_trabajo, name='crear_trabajo'),
+    path('eliminar_trabajo/<int:id_trabajo>&<int:id_proyecto>', views.eliminar_trabajo, name='eliminar_trabajo'),
 
     path('menu/', views.main_menu, name='menu_principal'),
     

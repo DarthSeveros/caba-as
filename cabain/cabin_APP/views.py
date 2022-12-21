@@ -85,6 +85,12 @@ def crear_material(request,id):
     return redirect(proyecto, id=id)
 
 @login_required
+def eliminar_material(request, id_proyecto, id_material):
+    material = ProjectDetail.objects.get(id=id_material)
+    material.delete()
+    return redirect(proyecto, id=id_proyecto)
+
+@login_required
 def crear_trabajo(request,id):
     proyecto_selec = Project.objects.get(id=id)
     if request.method == 'POST':
@@ -93,6 +99,12 @@ def crear_trabajo(request,id):
             form.save()
             return redirect(proyecto, id=id)
     return redirect(proyecto, id=id)
+
+@login_required
+def eliminar_trabajo(request, id_proyecto, id_trabajo):
+    project = ProjectWorker.objects.get(id=id_trabajo)
+    project.delete()
+    return redirect(proyecto, id=id_proyecto)
 
 
 

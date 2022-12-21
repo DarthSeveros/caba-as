@@ -3,6 +3,11 @@ function setIdDelete(id, nombre, url){
     document.getElementById('datoEliminado').textContent = nombre;
 }
 
+function setIdDeleteTrabajo(id, nombre, url){
+    document.getElementById('deleteTrabajoConfirm').href = url;
+    document.getElementById('trabajoEliminado').textContent = nombre;
+}
+
 function onLoadModal(modalId){
     var html = '<div id="modalBack" class="modal-backdrop fade show" onclick="dismiss(modalBack)"></div>';
     document.body.insertAdjacentHTML('beforeend', html);

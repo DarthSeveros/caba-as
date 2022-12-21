@@ -107,7 +107,20 @@ class FormProjectDetail(forms.ModelForm):
     class Meta:
         model = ProjectDetail
         widgets = {
-            'user': forms.HiddenInput
+            'user': forms.HiddenInput,
+            'project': forms.HiddenInput,
+            'product': forms.Select(
+                attrs={
+                    'class': 'form-select',
+                    'style': 'max-width: 200px;'
+                }
+            ),
+            'quantity': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'style': 'max-width: 200px;'
+                }
+            )
         }
         fields = '__all__'
 
@@ -115,6 +128,31 @@ class FormProjectWorker(forms.ModelForm):
     class Meta:
         model = ProjectWorker
         widgets = {
-            'user': forms.HiddenInput
+            'user': forms.HiddenInput,
+            'project': forms.HiddenInput,
+            'worker': forms.Select(
+                attrs={
+                    'class': 'form-select',
+                    'style': 'max-width: 200px;'
+                }
+            ),
+            'work': forms.TextInput(
+                attrs={ 
+                    'class': 'form-control',
+                    'style': 'max-width: 200px;'
+                }
+            ),
+            'payment': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'style': 'max-width: 200px;'
+                }
+            ),
+            'balance': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'style': 'max-width: 200px;'
+                }
+            )
         }
         fields = '__all__'

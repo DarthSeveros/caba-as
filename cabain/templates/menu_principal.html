@@ -1,10 +1,20 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block title %}Inicio{% endblock %}
 
 {% block body %}
-<div class="alert alert-info display-1 text-center">Inicio</div>
-<div class="row">
+{% include 'navbar.html' %}
+<div class="row" style ="margin-bottom: 100px;">
     <div class="col">
+        <img src=  {% static 'img/proyecto.png' %} class="card-img-top" alt="...">
+        <br>
+        <br>
+        <h2>Registrar proyectos</h2>
+        <br>
+        <div align="justify">
+            <h6>Registre sus proyectos anotando sus nombres, superficie y presupuesto que desea implementar.</h6>
+        </div>
+        <br>
         <button class="btn p-3 w-100 btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Proyectos
         </button>      
@@ -14,23 +24,38 @@
         </ul>
     </div>
     <div class="col">
+        <img src=  {% static 'img/facturas.png' %} class="card-img-top" alt="...">
+        <br>
+        <br>
+        <h2>Registrar factura</h2>
+        <br>
+        <div align="justify">
+            <h6>Registre sus facturas para asi tener registro de sus compras a travez que avanza el proyecto-</h6>
+        </div>
+        <br>
         <button class="btn p-3 w-100 btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Facturas
         </button>      
         <ul class="dropdown-menu">
-            <li><a href="{% url 'listado_factura' %}" class="dropdown-item" type="button">ver Factura</a></li>
+            <li><a href="{% url 'listado_factura' %}" class="dropdown-item" type="button">Ver Factura</a></li>
             <li><a href="{% url 'crear_factura' %}" class="dropdown-item" type="button">Nueva Factura</a></li>
-            <li><a href="{% url 'crear_cliente' %}" class="dropdown-item" type="button">Nuevo Cliente</a></li>
-            <li><a href="{% url 'crear_proveedor' %}" class="dropdown-item" type="button">Nuevo Proveedor</a></li>
+            <li><a href="{% url 'nuevo_detalle_factura' %}" class="dropdown-item" type="button">Nueva detalle Factura</a></li>
         </ul>
     </div>
     <div class="col">
+        <img src=  {% static 'img/extras1.png' %} class="card-img-top" alt="...">
+        <br>
+        <br>
+        <h2>Registrar proyecto/producto</h2>
+        <br>
+        <div align="justify">
+            <h6>Vea o registre sus maestros anotando sus nombres y telefono.</h6>
+        </div>
+        <br>
         <button class="btn p-3 w-100 btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Extras 
         </button>      
         <ul class="dropdown-menu">
-            <li><a href="{% url 'payment_method' %}" class="dropdown-item" type="button">Métodos de pago</a></li>
-            <li><a href="{% url 'unidad_medida' %}" class="dropdown-item" type="button">Unidades de medida</a></li>
             <li><a href="{% url 'maestro' %}" class="dropdown-item" type="button">Maestros</a></li>
             <li><a href="{% url 'producto' %}" class="dropdown-item" type="button">Productos</a></li>
         </ul>

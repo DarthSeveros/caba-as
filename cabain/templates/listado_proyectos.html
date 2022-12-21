@@ -2,6 +2,7 @@
 {% block title %}Proyectos{% endblock title %}
 
 {% block body %}
+{% include 'navbar.html' %}
   <div class="alert alert-info display-1 text-center">Proyectos</div>
 
 {% if items %}
@@ -22,5 +23,6 @@
           <strong>No se encuentran proyecto en el sistema</strong>
       </div>
 {% endif %}
+<br>
 <a href="{% url 'menu_principal' %}" class="btn btn-outline-secondary">Volver</a>
 {% endblock body %}
