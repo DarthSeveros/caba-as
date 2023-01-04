@@ -10,17 +10,23 @@ This project is simple Lorem ipsum dolor generator.
 	
 ## Technologies
 Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
+* Python - Django
+* Javascript
+* Html - Css
+* MySql
 	
 ## Setup
-To run this project, install it locally using npm:
-
+To run this project:
+install xampp:
+* Run apache and Mysql
+  
+In localhost create database 'cabins'
+ 
+In cabins folder run:
 ```
-$ cd ../lorem
-$ npm install
-$ npm start
+$ cd ../cabain
+$ python3 manage.py migrate
+$ python3 manage.py runserver
 ```
   
  
