@@ -6,7 +6,7 @@
 * [Setup](#setup)
 
 ## General info
-This project is simple Lorem ipsum dolor generator.
+This project is inventory management focus on construction industry, to keep tracking of budget, debts and materials in order to keep everithing on the same place
 	
 ## Technologies
 Project is created with:
@@ -16,11 +16,13 @@ Project is created with:
 * MySql
 	
 ## Setup
-To run this project:
-install xampp:
-* Run apache and Mysql
-  
-In localhost create database 'cabins'
+To run this project you need to install:
+* Xampp
+* Python 3
+* Django framework
+
+In Xampp run apache and mysql services
+In [http:localhost](http://localhost/phpmyadmin/) create database 'cabins'
  
 In cabins folder run:
 ```
