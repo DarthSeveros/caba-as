@@ -14,7 +14,7 @@ The project has sesions for different users, each one has their own projects
 ![Sign in](./images/Captura-1.png)
 
 
-Main manu of the page
+Main menu of the page
 ![Main menu](./images/Captura-2.png)
 
 
@@ -25,7 +25,7 @@ It also keeps bills
 ![Bill](./images/Captura-4.png)
 
 And the products that were bought in that bill
-![Main menu](./images/Captura-5.png)
+![Bill detail](./images/Captura-5.png)
 	
 ## Technologies
 Project is created with:
