@@ -24,7 +24,7 @@ Each project has details like works and materials
 It also keeps bills
 ![Bill](./images/Captura-4.png)
 
-
+And the products that were bought in that bill
 ![Main menu](./images/Captura-5.png)
 	
 ## Technologies
