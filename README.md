@@ -7,7 +7,7 @@
 
 ## General info
 This project is inventory management focus on construction industry, to keep tracking of budget, debts and materials in order to keep everithing on the same place
-![Inicio de sesión](/images/Captura-1.jpg)
+![Inicio de sesión](./images/Captura-1.png)
 	
 ## Technologies
 Project is created with:
