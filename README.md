@@ -24,7 +24,7 @@ Main manu of the page
 ![Main menu](./images/Captura-4.png)
 
 
-<img src="images/Captura-5.png" width="75">
+<img src="images/Captura-5.png" width="400px">
 	
 ## Technologies
 Project is created with:
