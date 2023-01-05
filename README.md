@@ -25,7 +25,7 @@ It also keeps bills
 ![Bill](./images/Captura-4.png)
 
 
-![Main menu](./images/Captura-4.png)
+![Main menu](./images/Captura-5.png)
 	
 ## Technologies
 Project is created with:
