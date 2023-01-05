@@ -11,9 +11,20 @@ This project is inventory management focus on construction industry, to keep tra
 
 ## Images
 The project has sesions for different users, each one has their own projects
-![Inicio de sesión](./images/Captura-1.png)
+![Sign in](./images/Captura-1.png)
 
-![Inicio de sesión](./images/Captura-2.png)
+
+Main manu of the page
+![Main menu](./images/Captura-2.png)
+
+
+![Main menu](./images/Captura-3.png)
+
+
+![Main menu](./images/Captura-4.png)
+
+
+![Main menu](./images/Captura-5.png)
 	
 ## Technologies
 Project is created with:
