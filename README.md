@@ -18,13 +18,14 @@ Main manu of the page
 ![Main menu](./images/Captura-2.png)
 
 
-![Main menu](./images/Captura-3.png)
+Each project has details like works and materials
+![Project detail](./images/Captura-3.png)
+
+It also keeps bills
+![Bill](./images/Captura-4.png)
 
 
 ![Main menu](./images/Captura-4.png)
-
-
-<img src="images/Captura-5.png" width="720px">
 	
 ## Technologies
 Project is created with:
